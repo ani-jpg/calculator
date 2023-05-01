@@ -1,3 +1,4 @@
+//Math functions
 function add (a,b) {
     return a+b; 
     };
@@ -14,7 +15,7 @@ function divide(a,b) {
     return a / b;
 }
 
-
+//Display variables on calculator 
 const buttons= document.querySelectorAll('button');
 const display= document.querySelector('#display');
 
@@ -26,8 +27,10 @@ buttons.forEach((button)=> { button.addEventListener ('click', () => {
 };
 calcDisplay();
 
+
+//Math functions 
 let total;
-let operator='lalallalala';
+let operator='lalalalala';
 function math() {
 let result= '';
     buttons.forEach((button)=> {button.addEventListener ('click', () => {
@@ -47,11 +50,9 @@ let result= '';
                 console.log(total, 'after');
 
                 return result;
-                //need to store the variable- done, its stored as result 
             }
             
             if (button.classList=='operator-btn') {
-                //store number as operator & if next is also a numb then you execute func of operator
                 if (button.id=='add') {
                     operator='add';
                 }
@@ -63,17 +64,18 @@ let result= '';
                 else if (button.id=='multiply') {
                     operator='multiply';
                 }
+                
+                else if (button.id=='equal') {
+                    total=total;
+                }
 
                 if (isNaN(total)) {
                     total= +result;
                 }
                 result = ' ';
             }
-            
+
             return total;
-            
-            
-    
     })  
     })
     
