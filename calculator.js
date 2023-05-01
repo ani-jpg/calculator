@@ -28,21 +28,22 @@ let result= '';
             if (button.classList=='number-btn') {
                 result += button.id;
                 display.textContent=result;
-
-                if (operator=='add') {
-                    total= add (+result, total);
-                }
-                else if (operator=='subtract') {
-                    total= subtract(total, +result)
-                }
-                else if (operator=='multiply') {
-                    total= multiply(+result, total);
-                }
-                
-                console.log(total, 'after');
-
+                console.log(result);
                 return result;
             }
+            
+            if (operator=='add') {
+                total= add (+result, total);
+            }
+            else if (operator=='subtract') {
+                total= subtract(total, +result)
+            }
+            else if (operator=='multiply') {
+                total= multiply(+result, total);
+            }
+            
+            console.log(total, 'after');
+        
             
             if (button.classList=='operator-btn') {
                 display.textContent=total;
