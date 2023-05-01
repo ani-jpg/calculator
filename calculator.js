@@ -15,22 +15,13 @@ function divide(a,b) {
     return a / b;
 }
 
-//Display variables on calculator 
+//Calculator math & display
 const buttons= document.querySelectorAll('button');
 const display= document.querySelector('#display');
 
-function calcDisplay() {
-buttons.forEach((button)=> { button.addEventListener ('click', () => {
-    display.textContent= button.id;
-})
-})
-};
-calcDisplay();
-
-
-//Math functions 
 let total;
 let operator='lalalalala';
+
 function math() {
 let result= '';
     buttons.forEach((button)=> {button.addEventListener ('click', () => {
@@ -47,21 +38,23 @@ let result= '';
                 else if (operator=='multiply') {
                     total= multiply(+result, total);
                 }
+                
                 console.log(total, 'after');
 
                 return result;
             }
             
             if (button.classList=='operator-btn') {
-                if (button.id=='add') {
+                display.textContent=total;
+                if (button.id=='+') {
                     operator='add';
                 }
     
-                else if (button.id=='subtract') {
+                else if (button.id=='-') {
                     operator='subtract'
                 }
     
-                else if (button.id=='multiply') {
+                else if (button.id=='x') {
                     operator='multiply';
                 }
                 
@@ -71,6 +64,7 @@ let result= '';
 
                 if (isNaN(total)) {
                     total= +result;
+                    display.textContent=button.id;
                 }
                 result = ' ';
             }
