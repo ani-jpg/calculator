@@ -54,11 +54,11 @@ function add (a,b) {
     return a+b; 
     
     };
+
+let total= 0;
 function math() {
 let result= '';
     buttons.forEach((button)=> {button.addEventListener ('click', () => {
-        let total= 0;
-    
             if (button.classList=='number-btn') {
                 result += button.id;
                 display.textContent=result;
