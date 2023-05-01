@@ -27,45 +27,49 @@ buttons.forEach((button)=> { button.addEventListener ('click', () => {
 calcDisplay();
 
 let total;
-let operator;
+let operator='lalallalala';
 function math() {
 let result= '';
     buttons.forEach((button)=> {button.addEventListener ('click', () => {
             if (button.classList=='number-btn') {
                 result += button.id;
                 display.textContent=result;
-                console.log(total, 'heylo');
+
+                if (operator=='add') {
+                    total= add (+result, total);
+                }
+                else if (operator=='subtract') {
+                    total= subtract(total, +result)
+                }
+                else if (operator=='multiply') {
+                    total= multiply(+result, total);
+                }
+                console.log(total, 'after');
+
                 return result;
                 //need to store the variable- done, its stored as result 
             }
             
             if (button.classList=='operator-btn') {
                 //store number as operator & if next is also a numb then you execute func of operator
-                
-                if (isNaN(total)) {
-                    total= +result;
-                    console.log(total, 'nan')
+                if (button.id=='add') {
+                    operator='add';
+                }
+    
+                else if (button.id=='subtract') {
+                    operator='subtract'
+                }
+    
+                else if (button.id=='multiply') {
+                    operator='multiply';
                 }
 
-                else {
-                    
-                if (button.id=='add') {
-                    total= add (+result, total);
+                if (isNaN(total)) {
+                    total= +result;
                 }
-    
-                    else if (button.id=='subtract') {
-                        total= subtract(total, +result)
-                    }
-    
-                    else if (button.id=='multiply') {
-                        total= multiply(+result, total);
-                    }
-                    
-                }
-                
                 result = ' ';
             }
-            console.log(total, 'ayo');
+            
             return total;
             
             
