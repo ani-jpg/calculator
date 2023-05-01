@@ -46,7 +46,7 @@ let result= '';
         
             
             if (button.classList=='operator-btn') {
-                display.textContent=total;
+                display.textContent=total + "   " + button.id;
                 if (button.id=='+') {
                     operator='add';
                 }
@@ -61,6 +61,7 @@ let result= '';
                 
                 else if (button.id=='equal') {
                     total=total;
+                    display.textContent=total;
                 }
 
                 if (isNaN(total)) {
