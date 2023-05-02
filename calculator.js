@@ -38,6 +38,7 @@ let result= '';
                     display.textContent= y + result;
                 }
                 return result;
+                
             }
 
             if (operator=='add') {
@@ -47,12 +48,17 @@ let result= '';
                 total= subtract(total, +result)
             }
             else if (operator=='multiply') {
-                total= multiply(+result, total);
+                if (result==0) {
+                    total= multiply(1, total);
+                }
+                else {
+                    total= multiply(+result, total);
+                }
             }
         
             
             if (button.classList=='operator-btn') {
-
+                console.log(total, 'start');
                 if (button.id=='+') {
                     operator='add';
                     x= '+';
@@ -70,7 +76,6 @@ let result= '';
                 
                 else if (button.id=='equal') {
                     x= '=';
-                    console.log(total);
                 }
 
                     if (isNaN(total)) {
