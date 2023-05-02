@@ -23,8 +23,7 @@ let total;
 let operator='lalalalala';
 let x;
 let y;
-
-
+let numbDisplay;
 
 function math() {
 let result= '';
@@ -35,10 +34,20 @@ let result= '';
                     display.textContent= result;
                 }
                 else {
-                    display.textContent= y + result;
+                    numbDisplay= y+result;
+                    display.textContent= numbDisplay;
+                    console.log(y);
                 }
                 return result;
-                
+            }
+
+            if (operator!='equal') {
+                if (button.id=='backspace') {
+                    y = y.substring(0, numbDisplay.length-1);
+                    display.textContent=y;
+                    result= ' ';
+                    console.log(total, 'result', result, 'y', y);
+                }
             }
 
             if (operator=='add') {
@@ -56,7 +65,6 @@ let result= '';
                 }
             }
         
-            
             if (button.classList=='operator-btn') {
                 console.log(total, 'start');
                 if (button.id=='+') {
@@ -75,6 +83,7 @@ let result= '';
                 }
                 
                 else if (button.id=='equal') {
+                    operator='equal';
                     x= '=';
                 }
 
@@ -82,6 +91,7 @@ let result= '';
                         total= +result;
                         y= total + "   " + x;
                     }
+
                     else {
                         if (x=='=') {
                             y= y + "   " + result + "   " + x + "   " + total;
@@ -94,10 +104,10 @@ let result= '';
                 display.textContent= y;
                 result = ' ';
             }
-
             return total;
     })  
     })
     
 };
 math ();
+
