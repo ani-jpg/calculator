@@ -36,7 +36,6 @@ let result= '';
                 else {
                     numbDisplay= y+result;
                     display.textContent= numbDisplay;
-                    console.log(y);
                 }
                 return result;
             }
@@ -46,7 +45,6 @@ let result= '';
                     y = y.substring(0, numbDisplay.length-1);
                     display.textContent=y;
                     result= ' ';
-                    console.log(total, 'result', result, 'y', y);
                 }
             }
 
@@ -66,7 +64,6 @@ let result= '';
             }
         
             if (button.classList=='operator-btn') {
-                console.log(total, 'start');
                 if (button.id=='+') {
                     operator='add';
                     x= '+';
@@ -87,6 +84,15 @@ let result= '';
                     x= '=';
                 }
 
+                else if (button.id=='percentage') {
+                    if (isNaN(total)) {
+                        total= +result/100;
+                    }
+                    x= '/100';
+                    console.log(total);
+                    
+                }
+
                     if (isNaN(total)) {
                         total= +result;
                         y= total + "   " + x;
@@ -95,6 +101,9 @@ let result= '';
                     else {
                         if (x=='=') {
                             y= y + "   " + result + "   " + x + "   " + total;
+                        }
+                        else if (x=='/100') {
+                            y= result + "   " + x + "   " + "=" + "   " + total;
                         }
                         else {
                             y= y + "   " + result + "   " + x;
