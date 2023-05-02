@@ -21,17 +21,26 @@ const display= document.querySelector('#display');
 
 let total;
 let operator='lalalalala';
+let x;
+let y;
 
 function math() {
 let result= '';
     buttons.forEach((button)=> {button.addEventListener ('click', () => {
             if (button.classList=='number-btn') {
                 result += button.id;
-                display.textContent=result;
+                if (isNaN(total)) {
+                    display.textContent= result;
+                }
+                else {
+                    console.log(x);
+                    display.textContent= y + result;
+                }
                 console.log(result);
                 return result;
             }
-            
+
+    
             if (operator=='add') {
                 total= add (+result, total);
             }
@@ -46,28 +55,41 @@ let result= '';
         
             
             if (button.classList=='operator-btn') {
-                display.textContent=total + "   " + button.id;
                 if (button.id=='+') {
                     operator='add';
+                    x= '+';
                 }
     
                 else if (button.id=='-') {
-                    operator='subtract'
+                    operator='subtract';
+                    x= '-';
                 }
     
                 else if (button.id=='x') {
                     operator='multiply';
+                    x= 'x';
                 }
                 
                 else if (button.id=='equal') {
-                    total=total;
-                    display.textContent=total;
+                    x= '=';
                 }
 
                 if (isNaN(total)) {
                     total= +result;
-                    display.textContent=button.id;
+                    y= total + "   " + x;
                 }
+
+                else {
+                    if (x=='=') {
+                        y= y + "   " + result + "   " + x + "   " + total;
+                    }
+                    else {
+                        y= y + "   " + result + "   " + x;
+                    }
+                    
+                }
+                
+                display.textContent= y;
                 result = ' ';
             }
 
@@ -76,5 +98,5 @@ let result= '';
     })
     
 };
-
 math ();
+
