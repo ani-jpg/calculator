@@ -24,6 +24,8 @@ let operator='lalalalala';
 let x;
 let y;
 
+
+
 function math() {
 let result= '';
     buttons.forEach((button)=> {button.addEventListener ('click', () => {
@@ -33,14 +35,11 @@ let result= '';
                     display.textContent= result;
                 }
                 else {
-                    console.log(x);
                     display.textContent= y + result;
                 }
-                console.log(result);
                 return result;
             }
 
-    
             if (operator=='add') {
                 total= add (+result, total);
             }
@@ -50,21 +49,20 @@ let result= '';
             else if (operator=='multiply') {
                 total= multiply(+result, total);
             }
-            
-            console.log(total, 'after');
         
             
             if (button.classList=='operator-btn') {
+
                 if (button.id=='+') {
                     operator='add';
                     x= '+';
                 }
-    
+            
                 else if (button.id=='-') {
                     operator='subtract';
                     x= '-';
                 }
-    
+            
                 else if (button.id=='x') {
                     operator='multiply';
                     x= 'x';
@@ -72,23 +70,22 @@ let result= '';
                 
                 else if (button.id=='equal') {
                     x= '=';
+                    console.log(total);
                 }
 
-                if (isNaN(total)) {
-                    total= +result;
-                    y= total + "   " + x;
-                }
-
-                else {
-                    if (x=='=') {
-                        y= y + "   " + result + "   " + x + "   " + total;
+                    if (isNaN(total)) {
+                        total= +result;
+                        y= total + "   " + x;
                     }
                     else {
-                        y= y + "   " + result + "   " + x;
+                        if (x=='=') {
+                            y= y + "   " + result + "   " + x + "   " + total;
+                        }
+                        else {
+                            y= y + "   " + result + "   " + x;
+                        }
+                        
                     }
-                    
-                }
-                
                 display.textContent= y;
                 result = ' ';
             }
@@ -99,4 +96,3 @@ let result= '';
     
 };
 math ();
-
