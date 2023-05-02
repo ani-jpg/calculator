@@ -88,6 +88,10 @@ let result= '';
                     if (isNaN(total)) {
                         total= +result/100;
                     }
+                    else {
+                        result= total;
+                        total= total/100;
+                    }
                     x= '/100';
                     console.log(total);
                     
