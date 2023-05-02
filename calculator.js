@@ -20,7 +20,7 @@ const buttons= document.querySelectorAll('button');
 const display= document.querySelector('#display');
 
 let total;
-let operator='lalalalala';
+let operator;
 let x;
 let y;
 let numbDisplay;
@@ -112,15 +112,25 @@ let result= '';
                         else {
                             y= y + "   " + result + "   " + x;
                         }
-                        
+                    
                     }
                 display.textContent= y;
                 result = ' ';
             }
+
+            if (button.id=='clear') {
+            total= NaN;
+             x='';
+             y='';
+             operator='';
+             result=' ';
+             display.textContent=y;
+            }
+
+
             return total;
     })  
     })
     
 };
 math ();
-
