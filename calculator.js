@@ -133,26 +133,27 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
 };
 
 
-
+//Keyboard functionality 
 document.addEventListener('keydown', (keyValue) => {
     let key= keyValue.key.match(/[0-9.*+-]/g);
     let button = document.querySelector(`button[id="${key}"]`);
+        if (keyValue.key=='Enter') {
+            button= document.querySelector(`button[id="${'equal'}"]`);
+        }
+        if (keyValue.key=='Backspace') {
+            button= document.querySelector(`button[id="${'backspace'}"]`);
+        }
 
-    if (keyValue.key=='Enter') {
-        button= document.querySelector(`button[id="${'equal'}"]`);
-    }
-    if (keyValue.key=='Backspace') {
-        button= document.querySelector(`button[id="${'backspace'}"]`);
-    }
+        if (keyValue.key=='%') {
+            button= document.querySelector(`button[id="${'%'}"]`);
+            console.log(button, '%%%');
+        }
+    
+button.click();
 
-    if (keyValue.key=='%') {
-        button= document.querySelector(`button[id="${'%'}"]`);
-        console.log(button, '%%%');
-    }
-
-    if (button) {
-        button.click();
-    }
 })
 
 math ();
+
+//lots of errors in the code like when u click CE the keyboard dont work properly and the backspace dont work and the equals dont work and so much lol
+//not sure how to mimick the hover and click effect with keyboard 
