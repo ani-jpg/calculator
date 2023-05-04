@@ -75,7 +75,7 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
                     x= '-';
                 }
             
-                else if (button.id=='x') {
+                else if (button.id=='*') {
                     operator='multiply';
                     x= 'x';
                 }
@@ -135,14 +135,24 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
 
 
 document.addEventListener('keydown', (keyValue) => {
-    let key= keyValue.key.match(/[0-9.]/g);
-    console.log(key); 
-    const button = document.querySelector(`.number-btn[id="${key}"]`);
-    console.log(button);
+    let key= keyValue.key.match(/[0-9.*+-]/g);
+    let button = document.querySelector(`button[id="${key}"]`);
+
+    if (keyValue.key=='Enter') {
+        button= document.querySelector(`button[id="${'equal'}"]`);
+    }
+    if (keyValue.key=='Backspace') {
+        button= document.querySelector(`button[id="${'backspace'}"]`);
+    }
+
+    if (keyValue.key=='%') {
+        button= document.querySelector(`button[id="${'%'}"]`);
+        console.log(button, '%%%');
+    }
+
     if (button) {
         button.click();
     }
-    
 })
 
 math ();
