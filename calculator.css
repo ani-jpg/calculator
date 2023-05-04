@@ -1,15 +1,38 @@
 .calculator-box {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 45px 45px 45px 45px;
     gap:10px;
     align-items: center;
     justify-content: center;
-    text-align: center;
     border: 2.5px solid black; 
     border-radius: 12px;
+    max-width: 200px;
+    padding: 10px;
+    margin: auto;
 }
+
 
 #display {
     grid-column-start: 1;
     grid-column-end: 5;
+    display: flex;
+    border: solid black;
+    justify-content: center;
+    max-width: 180px;
+    margin: auto;
+}
+
+button {
+    background-color: green;
+    font-size: 18px;
+    color: white;
+    text-align: center;
+
+}
+
+.calculator {
+    border: solid green;
+    max-width: 250px;  
+    margin-left: auto;
+    margin-right: auto;
 }

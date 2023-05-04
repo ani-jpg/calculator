@@ -9,7 +9,7 @@ function subtract(a, b) {
 
 function multiply(a,b) {
     return a * b;
-  };
+};
 
 function divide(a,b) {
     return a / b;
@@ -17,6 +17,7 @@ function divide(a,b) {
 
 //Calculator math & display
 const buttons= document.querySelectorAll('button');
+console.log(buttons);
 const display= document.querySelector('#display');
 
 let total;
@@ -27,8 +28,8 @@ let numbDisplay;
 
 function math() {
 let result= '';
-    buttons.forEach((button)=> {button.addEventListener ('click', () => {
-            if (button.classList=='number-btn') {
+buttons.forEach((button)=> {button.addEventListener ('click', () => {
+    if (button.classList=='number-btn') {
                 result += button.id;
                 if (isNaN(total)) {
                     display.textContent= result;
@@ -84,7 +85,7 @@ let result= '';
                     x= '=';
                 }
 
-                else if (button.id=='percentage') {
+                else if (button.id=='%') {
                     if (isNaN(total)) {
                         total= +result/100;
                     }
@@ -119,18 +120,29 @@ let result= '';
             }
 
             if (button.id=='clear') {
-            total= NaN;
-             x='';
-             y='';
-             operator='';
-             result=' ';
-             display.textContent=y;
+                total= NaN;
+                x='';
+                y='';
+                operator='';
+                result=' ';
+                display.textContent=y;
             }
-
-
             return total;
     })  
     })
-    
 };
+
+
+
+document.addEventListener('keydown', (keyValue) => {
+    let key= keyValue.key.match(/[0-9.]/g);
+    console.log(key); 
+    const button = document.querySelector(`.number-btn[id="${key}"]`);
+    console.log(button);
+    if (button) {
+        button.click();
+    }
+    
+})
+
 math ();
