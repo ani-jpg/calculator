@@ -20,68 +20,74 @@ const buttons= document.querySelectorAll('button');
 const display= document.querySelector('#display');
 const equalDisplay= document.querySelector('#equal-display');
 
+
 let total;
 let operator;
-let x, y, z;
-let numbDisplay;
+let x, z;
 
 function math() {
 let result= '';
 buttons.forEach((button)=> {button.addEventListener ('click', () => {
-    if (button.classList=='number-btn') {
-                result += button.id;
-                if (isNaN(total)) {
-                    display.textContent= result;
-                }
-                else {
-                    numbDisplay= y+result;
-                    display.textContent= numbDisplay;
-                    
-                        if (operator=='add') {
-                            total= add (+result, total);
-                        }
-                        else if (operator=='subtract') {
-                            total= subtract(total, +result)
-                        }
-                        else if (operator=='multiply') {
-                            if (result==' ') {
-                                total= multiply(1, total);
-                            }
-                            else {
-                                total= multiply(+result, total);
-                            }
-                        }
-                    
-                    z="=" + "   " + total;
-                    equalDisplay.textContent=z;
-                }
-                return result;
+
+let numbDisplay= button.id.match(/[0-9.*+-]/g);
+if (numbDisplay) {
+    display.textContent+=button.id;
+    console.log(display.textContent.length);   
+}
+
+if (button.classList=='number-btn') {
+    result += button.id;
+        if (operator=='add') {
+            total= add (+result, total);
+        }
+        else if (operator=='subtract') {
+            total= subtract(total, +result)
+        }
+        else if (operator=='multiply') {
+            if (result==' ') {
+                total= multiply(1, total);
             }
-            
-            if (button.id=='backspace') {
-                console.log(y);
-                y = y.substring(0, numbDisplay.length-1);
-                numbDisplay=y;
-                display.textContent=y;
-                console.log(result);
-                    if (operator=='add') {
-                        total= subtract (total, +result);
-                    }
-                    else if (operator=='subtract') {
-                        total= add(total, +result)
-                    }
-                    else if (operator=='multiply') {
-                        if (total==0) {
-                            total= +result;
-                        }
-                        else {
-                            total= divide(total, +result);
-                        }
-                    }
-                result= ' ';
-                console.log(total);
-                return y;
+            else {
+                total= multiply(+result, total);
             }
+        }
+    if (total!=undefined && !isNaN(total)) {
+        equalDisplay.textContent= "=" + "   " + total;
+    }
+    else {
+        equalDisplay.textContent= ' ';
+    }
+    return result;
+}
+
+if (button.id=='backspace') {
+
+    if (display.textContent.length<3) {
+        total=NaN;
+        equalDisplay.textContent= ' ';
+    }
+
+    display.textContent = display.textContent.substring(0, display.textContent.length-1);
+
+    if (operator=='add') {
+        total= subtract (total, +result);
+    }
+    else if (operator=='subtract') {
+        total= add(total, +result)
+    }
+    else if (operator=='multiply') {
+        if (total==0) {
+            total= +result;
+        }
+        else {
+            total= divide(total, +result);
+        }
+    }
+    result= ' ';
+    console.log(display.textContent)
+}
+
+
             
 
         
@@ -126,11 +132,11 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
                     else {
                         if (x=='=') {
                             y= y + result;
-                            z= x + "   " + total;
+                          
                         }
                         else if (x=='/100') {
                             y= result + x;
-                            z= "=" + "   " + total;
+                            
                         }
                         else {
                             y= y + result +  x;
@@ -138,9 +144,9 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
                     
                     }
             }
-            equalDisplay.textContent=z;
-            display.textContent= y;
+            
             result = ' ';
+            
 
             if (button.id=='clear') {
                 total= NaN;
@@ -171,9 +177,14 @@ document.addEventListener('keydown', (keyValue) => {
             button= document.querySelector(`button[id="${'%'}"]`);
             console.log(button, '%%%');
         }
-    
-button.click();
 
+        if (keyValue.key=' ') {
+            
+        }
+
+        if (button) {
+            button.click();
+        }  
 })
 
 math ();
