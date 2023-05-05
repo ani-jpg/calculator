@@ -9,33 +9,45 @@ body {
 
 .calculator-box {
     display: grid;
-    grid-template-columns: 45px 45px 45px 45px;
-    gap:10px;
+    grid-template-columns: 60px 60px 60px 60px;
+    gap:15px;
     align-items: center;
     justify-content: center;
     border: 2.5px solid black; 
     border-radius: 12px;
     max-width: 200px;
-    padding: 10px;
     margin: auto;
-    background-color: rgba(17, 163, 17, 0.312);
-
+    background-color:rgb(207, 249, 196);
+    padding: 30px 60px;
+    margin-bottom: 6px;
 }
 
+.display-box {
+    display: flex;
+    flex-direction: row;
+    border: solid black;
+    width: 285px;
+    margin: 4px;
+    padding: 4px 15px;
+    font-size: 28px;
+    background-color: rgb(243, 236, 236);
+    border-radius: 10px;
+    align-items: left;
+    justify-content: space-between;
+}
 
 #display {
-    grid-column-start: 1;
-    grid-column-end: 5;
-    display: flex;
-    border: solid black;
-    justify-content: center;
-    max-width: 180px;
-    margin: auto;
+    
+    
+}
+
+#equal-display {
+    background-color: red;
 }
 
 button {
-    background-color: rgb(32, 140, 32);
-    font-size: 18px;
+    background-color: rgb(38, 100, 38);
+    font-size: 30px;
     color: white;
     text-align: center;
     cursor: pointer;
@@ -43,7 +55,9 @@ button {
     border:none;
     box-shadow: 1px 2px rgb(197, 196, 196);
     border-radius: 2px;
-
+    padding: 6px;
+    height: 50px;
+    
     font-family: 'LCD', sans-serif;
     font-family: 'LCD2', sans-serif;
     font-family: 'LCDMono2', sans-serif;
@@ -57,13 +71,24 @@ button:hover {
 
 button:active {
     background-color:rgb(172, 172, 10);
-    box-shadow: 0px 2px rgb(116, 115, 115);
-    transform: translateY(2px);
+    box-shadow: 0px 4px rgb(116, 115, 115);
+    transform: translateY(4px);
 }
 
 .calculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: solid green;
-    max-width: 250px;  
+    max-width: 335px; 
     margin-left: auto;
-    margin-right: auto;      
+    margin-right: auto;
+    border-radius: 20px;
+    background-color: rgb(64, 109, 68);
+
+}
+
+.number-btn {
+    background-color: rgb(66, 133, 66);
 }
