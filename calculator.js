@@ -84,7 +84,11 @@ if (button.id=='backspace') {
         }
     }
     result= ' ';
-    console.log(display.textContent)
+    
+    if ((/[^0-9.]$/.test(display.textContent))) {
+        equalDisplay.textContent= "=" + "   " + total;
+    }
+    return total;
 }
 
 
