@@ -59,7 +59,9 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
             }
             
             if (button.id=='backspace') {
+                console.log(y);
                 y = y.substring(0, numbDisplay.length-1);
+                numbDisplay=y;
                 display.textContent=y;
                 console.log(result);
                     if (operator=='add') {
@@ -78,7 +80,9 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
                     }
                 result= ' ';
                 console.log(total);
+                return y;
             }
+            
 
         
             if (button.classList=='operator-btn') {
@@ -116,20 +120,20 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
 
                     if (isNaN(total)) {
                         total= +result;
-                        y= total + "   " + x;
+                        y= total + x;
                     }
 
                     else {
                         if (x=='=') {
-                            y= y + "   " + result + "   ";
+                            y= y + result;
                             z= x + "   " + total;
                         }
                         else if (x=='/100') {
-                            y= result + "   " + x;
+                            y= result + x;
                             z= "=" + "   " + total;
                         }
                         else {
-                            y= y + "   " + result + "   " + x;
+                            y= y + result +  x;
                         }
                     
                     }
