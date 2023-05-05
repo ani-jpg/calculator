@@ -7,21 +7,7 @@ body {
     /*downloaded from sus website lol*/
 }
 
-.calculator-box {
-    display: grid;
-    grid-template-columns: 60px 60px 60px 60px;
-    gap:15px;
-    align-items: center;
-    justify-content: center;
-    border: 2.5px solid black; 
-    border-radius: 12px;
-    max-width: 200px;
-    margin: auto;
-    background-color:rgb(207, 249, 196);
-    padding: 30px 60px;
-    margin-bottom: 6px;
-}
-
+/*Display box*/
 .display-box {
     display: flex;
     flex-direction: row;
@@ -45,6 +31,22 @@ body {
     background-color: red;
 }
 
+/*Calculator buttons*/
+.calculator-box {
+    display: grid;
+    grid-template-columns: 60px 60px 60px 60px;
+    gap:15px;
+    align-items: center;
+    justify-content: center;
+    border: 2.5px solid black; 
+    border-radius: 12px;
+    max-width: 200px;
+    margin: auto;
+    background-color:rgb(207, 249, 196);
+    padding: 30px 60px;
+    margin-bottom: 6px;
+}
+
 button {
     background-color: rgb(38, 100, 38);
     font-size: 30px;
@@ -65,6 +67,10 @@ button {
     font-family: 'Digitalism', sans-serif;
 }
 
+.number-btn {
+    background-color: rgb(66, 133, 66);
+}
+
 button:hover {
     background-color: yellow;
 }
@@ -75,6 +81,7 @@ button:active {
     transform: translateY(4px);
 }
 
+/*Calculator holder*/
 .calculator {
     display: flex;
     flex-direction: column;
@@ -87,8 +94,4 @@ button:active {
     border-radius: 20px;
     background-color: rgb(64, 109, 68);
 
-}
-
-.number-btn {
-    background-color: rgb(66, 133, 66);
 }
