@@ -37,31 +37,46 @@ if (numbDisplay) {
 
 if (button.classList=='number-btn') {
     result += button.id;
-        if (operator=='add') {
-            total= add (+result, total);
-        }
-        else if (operator=='subtract') {
-            total= subtract(total, +result)
-        }
-        else if (operator=='multiply') {
-            if (result==' ') {
-                total= multiply(1, total);
-            }
-            else {
-                total= multiply(+result, total);
-            }
-        }
-    if (total!=undefined && !isNaN(total)) {
-        equalDisplay.textContent= "=" + "   " + total;
-    }
-    else {
-        equalDisplay.textContent= ' ';
-    }
     return result;
 }
 
+if (operator=='+') {
+    total= add (+result, total);
+}
+else if (operator=='-') {
+    total= subtract(total, +result)
+}
+else if (operator=='x') {
+    if (result==' ') {
+        total= multiply(1, total);
+    }
+    else {
+        total= multiply(+result, total);
+    }
+}
+if (total!=undefined && !isNaN(total)) {
+equalDisplay.textContent= "=" + "   " + total;
+}
+else {
+equalDisplay.textContent= ' ';
+}
+
+//Backspace
 if (button.id=='backspace') {
 
+    const operands=display.textContent.split(/[-+x]/);
+    console.log(operands);
+
+    if (display.textContent.match(/[^0-9.]$/)) {
+        operator= display.textContent.charAt(display.textContent.length-1);
+        console.log(operator);
+        
+    }
+
+    if (display.textContent.match(/[0-9.]$/)) {
+        console.log('idk')
+    }
+    
     if (display.textContent.length<3) {
         total=NaN;
         equalDisplay.textContent= ' ';
@@ -69,13 +84,14 @@ if (button.id=='backspace') {
 
     display.textContent = display.textContent.substring(0, display.textContent.length-1);
 
-    if (operator=='add') {
+
+    if (operator=='+') {
         total= subtract (total, +result);
     }
-    else if (operator=='subtract') {
+    else if (operator=='-') {
         total= add(total, +result)
     }
-    else if (operator=='multiply') {
+    else if (operator=='x') {
         if (total==0) {
             total= +result;
         }
@@ -84,77 +100,69 @@ if (button.id=='backspace') {
         }
     }
     result= ' ';
-    
-    if ((/[^0-9.]$/.test(display.textContent))) {
-        equalDisplay.textContent= "=" + "   " + total;
-    }
+
     return total;
 }
 
+if (button.classList=='operator-btn') {
+    if (button.id=='+') {
+        operator= '+';
+    }
 
-            
-
+    else if (button.id=='-') {
+        operator='-';
         
-            if (button.classList=='operator-btn') {
-                if (button.id=='+') {
-                    operator='add';
-                    x= '+';
-                }
-            
-                else if (button.id=='-') {
-                    operator='subtract';
-                    x= '-';
-                }
-            
-                else if (button.id=='*') {
-                    operator='multiply';
-                    x= 'x';
-                }
+    }
+
+    else if (button.id=='*') {
+        operator='x';
+    
+    }
+    
+    else if (button.id=='equal') {
+        operator='=';
+
+    }
+
+    else if (button.id=='%') {
+        if (isNaN(total)) {
+            total= +result/100;
+        }
+        else {
+            result= total;
+            total= total/100;
+        }
+        operator= '/100'
+        
+    }
+
+        if (isNaN(total)) {
+            total= +result;
+            y= total + operator;
+        }
+
+        else {
+            if (x=='=') {
+                y= y + result;
                 
-                else if (button.id=='equal') {
-                    operator='equal';
-                    x= '=';
-                }
-
-                else if (button.id=='%') {
-                    if (isNaN(total)) {
-                        total= +result/100;
-                    }
-                    else {
-                        result= total;
-                        total= total/100;
-                    }
-                    x= '/100'
-                    
-                }
-
-                    if (isNaN(total)) {
-                        total= +result;
-                        y= total + x;
-                    }
-
-                    else {
-                        if (x=='=') {
-                            y= y + result;
-                          
-                        }
-                        else if (x=='/100') {
-                            y= result + x;
-                            
-                        }
-                        else {
-                            y= y + result +  x;
-                        }
-                    
-                    }
             }
-            
-            result = ' ';
-            
+            else if (x=='/100') {
+                y= result + operator;
+                
+            }
+            else {
+                y= y + result +  operator;
+            }
+        
+        }
+}
+
+result = ' ';
+
 
             if (button.id=='clear') {
                 total= NaN;
-                x='';
+               
                 y='';
                 operator='';
                 result=' ';
@@ -163,6 +171,7 @@ if (button.id=='backspace') {
             return total;
     })  
     })
+
 };
 
 
