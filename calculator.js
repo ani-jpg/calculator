@@ -32,7 +32,6 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
 let numbDisplay= button.id.match(/[0-9.*+-]/g);
 if (numbDisplay) {
     display.textContent+=button.id;
-    console.log(display.textContent.length);   
 }
 
 if (button.classList=='number-btn') {
@@ -63,18 +62,25 @@ equalDisplay.textContent= ' ';
 
 //Backspace
 if (button.id=='backspace') {
-
+    console.log('before',result, total);
     const operands=display.textContent.split(/[-+x]/);
-    console.log(operands);
-
+    console.log(operands,operands[operands.length-2]);
+    
+    
+    
     if (display.textContent.match(/[^0-9.]$/)) {
         operator= display.textContent.charAt(display.textContent.length-1);
         console.log(operator);
+        equalDisplay.textContent= total;
         
     }
 
     if (display.textContent.match(/[0-9.]$/)) {
-        console.log('idk')
+    equalDisplay.textContent= ' ';
+         if (result== '') {
+            result= operands[operands.length-1];
+            console.log(result);
+         }
     }
     
     if (display.textContent.length<3) {
@@ -83,7 +89,6 @@ if (button.id=='backspace') {
     }
 
     display.textContent = display.textContent.substring(0, display.textContent.length-1);
-
 
     if (operator=='+') {
         total= subtract (total, +result);
@@ -99,9 +104,10 @@ if (button.id=='backspace') {
             total= divide(total, +result);
         }
     }
-    result= ' ';
-
+    result= '';
+    console.log(total);
     return total;
+    
 }
 
 if (button.classList=='operator-btn') {
