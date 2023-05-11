@@ -62,50 +62,47 @@ equalDisplay.textContent= ' ';
 
 //Backspace
 if (button.id=='backspace') {
-    console.log('before',result, total);
     const operands=display.textContent.split(/[-+x]/);
-    console.log(operands,operands[operands.length-2]);
-    
-    
     
     if (display.textContent.match(/[^0-9.]$/)) {
         operator= display.textContent.charAt(display.textContent.length-1);
-        console.log(operator);
         equalDisplay.textContent= total;
-        
     }
 
     if (display.textContent.match(/[0-9.]$/)) {
     equalDisplay.textContent= ' ';
          if (result== '') {
             result= operands[operands.length-1];
-            console.log(result);
          }
     }
     
-    if (display.textContent.length<3) {
-        total=NaN;
-        equalDisplay.textContent= ' ';
-    }
+    
 
     display.textContent = display.textContent.substring(0, display.textContent.length-1);
 
-    if (operator=='+') {
-        total= subtract (total, +result);
-    }
-    else if (operator=='-') {
-        total= add(total, +result)
-    }
-    else if (operator=='x') {
-        if (total==0) {
-            total= +result;
+
+        if (operator=='+') {
+            total= subtract (total, +result);
         }
-        else {
-            total= divide(total, +result);
+        else if (operator=='-') {
+            total= add(total, +result)
         }
+        else if (operator=='x') {
+            if (total==0) {
+                total= +result;
+            }
+            else {
+                total= divide(total, +result);
+            }
+        }
+        result= '';
+    
+    if (display.textContent.length<3) {
+        result=+(operands[0]);
+        total=NaN;
+        equalDisplay.textContent= ' ';
     }
-    result= '';
-    console.log(total);
+    console.log(total, result)
     return total;
     
 }
