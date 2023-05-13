@@ -15,6 +15,10 @@ function divide(a,b) {
     return a / b;
 }
 
+function percentage(a) {
+    return a/100;
+}
+
 //Calculator math & display
 const buttons= document.querySelectorAll('button');
 const display= document.querySelector('#display');
@@ -22,20 +26,21 @@ const equalDisplay= document.querySelector('#equal-display');
 
 let result;
 let numb1=NaN;
-let numb2=NaN;
+let numb2='test';
 let operator='';
+let testString='';
+let numb2Array;
 
 function math() {
 
 buttons.forEach((button)=> {button.addEventListener ('click', () => {
 
-let numbDisplay= button.id.match(/[0-9.*+-]/g);
+let numbDisplay= button.id.match(/[%0-9.*+-]/g);
 if (numbDisplay) {
     display.textContent+=button.id;
 }
 
 const operands=display.textContent.split(/[-+*]/);
-
 
 if (button.id=='backspace') {
     
@@ -49,7 +54,6 @@ if (button.id=='backspace') {
 
 if (operands.length>1) {
     if (operands[operands.length-1]!=='') {
-        
         if (isNaN(result)) {
             numb1=+(operands[0]);
         }
@@ -59,6 +63,16 @@ if (operands.length>1) {
         }
         numb2= operands[operands.length-1];
 }
+}
+
+if (isNaN(numb2)) {
+    if (numb2!=='test') {
+        testString= numb2.toString();
+        console.log(testString);
+        numb2Array= testString.split('/') 
+        console.log(numb2Array);
+        numb2=numb2Array[0];
+    }   
 }
 
 
@@ -73,6 +87,17 @@ if (button.classList=='operator-btn') {
     else if (operator=='x') {
         result= multiply(+numb1, +numb2);
     }
+    else if (operator=='%') {
+        
+        if (operands.length<=1) {
+            const percent=display.textContent.split('/100');
+            result=percentage(+(percent[0]))
+        }
+        if (operands.length>1) {
+            result=percentage(+numb1)
+        }
+       
+    } 
 
     if (button.id=='+') {
         operator= '+';
@@ -86,7 +111,15 @@ if (button.classList=='operator-btn') {
     else if (button.id=='equal') {
         operator='=';
     }
+    else if (button.id=='/100'){
+        operator='%';
+    }
+
+
+
+
 }
+
 
 equalDisplay.textContent=result;
 
@@ -108,8 +141,7 @@ document.addEventListener('keydown', (keyValue) => {
         }
 
         if (keyValue.key=='%') {
-            button= document.querySelector(`button[id="${'%'}"]`);
-            console.log(button, '%%%');
+            button= document.querySelector(`button[id="${'/100'}"]`);
         }
 
         if (keyValue.key=' ') {
