@@ -34,6 +34,32 @@ if (numbDisplay) {
     display.textContent+=button.id;
 }
 
+const operands=display.textContent.split(/[-+*]/);
+
+if (operands.length>1) {
+    if (operands[operands.length-1]!=='') {
+        
+        if (isNaN(result)) {
+            numb1=+(operands[0]);
+        }
+        else {
+            numb1= result;
+            
+        }
+        numb2= operands[operands.length-1];
+}
+}
+
+if (operator=='+') {
+    result= add(+numb1, +numb2);
+}
+else if (operator=='-') {
+    result= subtract(+numb1, +numb2)
+}
+else if (operator=='x') {
+    result= multiply(+numb1, +numb2);
+}
+
 if (button.classList=='operator-btn') {
     if (button.id=='+') {
         operator= '+';
@@ -49,29 +75,6 @@ if (button.classList=='operator-btn') {
     }
 }
 
-const operands=display.textContent.split(/[-+x]/);
-
-if (operands.length<3) {
-    numb1=operands[0];
-    numb2=operands[1];
-}
-
-else if (operands.length>=3) {
-    if (operands[operands.length-1]!=='') {
-        numb1= result;
-        numb2= operands[operands.length-1];
-    }
-}
-
-if (operator=='+') {
-    result= add(+numb1, +numb2);
-}
-else if (operator=='-') {
-    total= subtract(+numb1, +numb2)
-}
-else if (operator=='x') {
-    multiply(+numb1, +numb2);
-}
 equalDisplay.textContent=result;
 
 return result;
