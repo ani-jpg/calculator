@@ -21,13 +21,16 @@ const display= document.querySelector('#display');
 const equalDisplay= document.querySelector('#equal-display');
 
 
-let total;
-let operator='';
-let x, z;
-let numb1, numb2;
+
+let operators='';
+let operation;
+let reuslt=NaN;
+
+let numb1=NaN;
+let numb2=NaN;
 
 function math() {
-let result= '';
+
 buttons.forEach((button)=> {button.addEventListener ('click', () => {
 
 let numbDisplay= button.id.match(/[0-9.*+-]/g);
@@ -36,28 +39,39 @@ if (numbDisplay) {
 }
 
 if (display.textContent.match(/[^0-9.]$/)) {
-    operator+=button.id;
+    operators+=button.id;
 }
 
-let operators=operator.split('');
-console.log(operators);
-
+let operatorArray=operators.split('');
 
 const operands=display.textContent.split(/[-+x]/);
 
+if (operands.length<3) {
+    numb1=operands[0];
+    numb2=operands[1];
+    result= add(+numb1, +numb2)
+    console.log(numb1, numb2, result);
+}
 
-if (operands.length>=2) {
-    for (i=0; i<operands.length; i++) {
-        numb1= operands[i];
-        numb2= operands [i+1];
-        let result= add(+numb1, +numb2);
+else if (operands.length>=3) {
+    if (operands[operands.length-1]!=='') {
+        numb1= result;
+        console.log(result,'hi')
+        numb2= operands[operands.length-1];
+        result= add(+numb1, +numb2)
+
+        for (j=0; j<operatorArray.length; j++) {
+            operation=operatorArray[j];
+        }
+        console.log(+result);
+        
         
     }
+       
 }
 
     })  
     })
-
 };
 
 
