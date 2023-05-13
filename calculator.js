@@ -20,14 +20,10 @@ const buttons= document.querySelectorAll('button');
 const display= document.querySelector('#display');
 const equalDisplay= document.querySelector('#equal-display');
 
-
-
-let operators='';
-let operation;
-let reuslt=NaN;
-
+let result;
 let numb1=NaN;
 let numb2=NaN;
+let operator='';
 
 function math() {
 
@@ -38,38 +34,47 @@ if (numbDisplay) {
     display.textContent+=button.id;
 }
 
-if (display.textContent.match(/[^0-9.]$/)) {
-    operators+=button.id;
+if (button.classList=='operator-btn') {
+    if (button.id=='+') {
+        operator= '+';
+    }
+    else if (button.id=='-') {
+        operator='-';
+    }
+    else if (button.id=='*') {
+        operator='x';
+    }
+    else if (button.id=='equal') {
+        operator='=';
+    }
 }
-
-let operatorArray=operators.split('');
 
 const operands=display.textContent.split(/[-+x]/);
 
 if (operands.length<3) {
     numb1=operands[0];
     numb2=operands[1];
-    result= add(+numb1, +numb2)
-    console.log(numb1, numb2, result);
 }
 
 else if (operands.length>=3) {
     if (operands[operands.length-1]!=='') {
         numb1= result;
-        console.log(result,'hi')
         numb2= operands[operands.length-1];
-        result= add(+numb1, +numb2)
-
-        for (j=0; j<operatorArray.length; j++) {
-            operation=operatorArray[j];
-        }
-        console.log(+result);
-        
-        
     }
-       
 }
 
+if (operator=='+') {
+    result= add(+numb1, +numb2);
+}
+else if (operator=='-') {
+    total= subtract(+numb1, +numb2)
+}
+else if (operator=='x') {
+    multiply(+numb1, +numb2);
+}
+equalDisplay.textContent=result;
+
+return result;
     })  
     })
 };
