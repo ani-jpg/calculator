@@ -38,6 +38,11 @@ if (numbDisplay) {
     display.textContent+=button.id;
 }
 
+if (button.id=='clear') {
+    display.textContent = '';
+    equalDisplay.textContent='';
+}
+
 const operands=display.textContent.split(/[-+*]/);
 
 if (button.id=='backspace') {
@@ -114,11 +119,7 @@ if (button.id=='Ans') {
     equalDisplay.textContent='';
 }
 
-if (button.id=='clear') {
-    display.textContent = '';
-    result=NaN;
-    equalDisplay.textContent='';
-}
+
 
 if (button.id=='equal') {
     equalDisplay.textContent= "=" + "  " + result;
