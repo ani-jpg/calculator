@@ -41,7 +41,7 @@ if (numbDisplay) {
 }
 
 const operands=display.textContent.split(/[-+*]/);
-
+console.log(operands, result)
 if (button.id=='backspace') {
     
     if (display.textContent.match(/[^0-9.]$/)) {
@@ -65,15 +65,15 @@ if (operands.length>1) {
 }
 }
 
+//not sure i need this anymore actually
 if (isNaN(numb2)) {
     if (numb2!=='test') {
         testString= numb2.toString();
-        console.log(testString);
         numb2Array= testString.split('/') 
-        console.log(numb2Array);
         numb2=numb2Array[0];
     }   
 }
+
 
 
 if (button.classList=='operator-btn') {
@@ -87,17 +87,7 @@ if (button.classList=='operator-btn') {
     else if (operator=='x') {
         result= multiply(+numb1, +numb2);
     }
-    else if (operator=='%') {
-        
-        if (operands.length<=1) {
-            const percent=display.textContent.split('/100');
-            result=percentage(+(percent[0]))
-        }
-        if (operands.length>1) {
-            result=percentage(+numb1)
-        }
-       
-    } 
+  
 
     if (button.id=='+') {
         operator= '+';
@@ -111,15 +101,22 @@ if (button.classList=='operator-btn') {
     else if (button.id=='equal') {
         operator='=';
     }
-    else if (button.id=='/100'){
-        operator='%';
-    }
-
-
-
-
+    
 }
 
+if (button.id=='/100') {
+        
+    if (operands.length<=1) {
+        const percent=display.textContent.split('/100');
+        result=percentage(+(percent[0]))
+    }
+    if (operands.length>1) {
+        result=percentage(+result)
+    }
+    display.textContent = result;
+    numb1=result;
+    numb2='';
+} 
 
 equalDisplay.textContent=result;
 
