@@ -27,6 +27,7 @@ const equalDisplay= document.querySelector('#equal-display');
 let result=NaN;
 let numb1=NaN;
 let numb2='test';
+let answer=false;
 let operator='';
 
 function math() {
@@ -111,20 +112,18 @@ if (button.id=='/100') {
 
 equalDisplay.textContent=result;
 
-
 if (button.id=='Ans') {
     display.textContent = result;
     numb1=result;
     numb2='';
-    equalDisplay.textContent='';
 }
-
 
 
 if (button.id=='equal') {
     equalDisplay.textContent= "=" + "  " + result;
 }
-return result;
+console.log(answer)
+return result, answer;
     })  
     })
 };
