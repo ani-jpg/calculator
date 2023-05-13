@@ -36,6 +36,17 @@ if (numbDisplay) {
 
 const operands=display.textContent.split(/[-+*]/);
 
+
+if (button.id=='backspace') {
+    
+    if (display.textContent.match(/[^0-9.]$/)) {
+        operator= '';
+    }
+
+    display.textContent = display.textContent.substring(0, display.textContent.length-1);
+}
+
+
 if (operands.length>1) {
     if (operands[operands.length-1]!=='') {
         
@@ -50,17 +61,19 @@ if (operands.length>1) {
 }
 }
 
-if (operator=='+') {
-    result= add(+numb1, +numb2);
-}
-else if (operator=='-') {
-    result= subtract(+numb1, +numb2)
-}
-else if (operator=='x') {
-    result= multiply(+numb1, +numb2);
-}
 
 if (button.classList=='operator-btn') {
+
+    if (operator=='+') {
+        result= add(+numb1, +numb2);
+    }
+    else if (operator=='-') {
+        result= subtract(+numb1, +numb2)
+    }
+    else if (operator=='x') {
+        result= multiply(+numb1, +numb2);
+    }
+
     if (button.id=='+') {
         operator= '+';
     }
