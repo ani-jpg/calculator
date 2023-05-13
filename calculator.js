@@ -24,24 +24,22 @@ const buttons= document.querySelectorAll('button');
 const display= document.querySelector('#display');
 const equalDisplay= document.querySelector('#equal-display');
 
-let result;
+let result=NaN;
 let numb1=NaN;
 let numb2='test';
 let operator='';
-let testString='';
-let numb2Array;
 
 function math() {
 
 buttons.forEach((button)=> {button.addEventListener ('click', () => {
 
-let numbDisplay= button.id.match(/[%0-9.*+-]/g);
+let numbDisplay= button.id.match(/[%0-9.*+-=]/g);
 if (numbDisplay) {
     display.textContent+=button.id;
 }
 
 const operands=display.textContent.split(/[-+*]/);
-console.log(operands, result)
+
 if (button.id=='backspace') {
     
     if (display.textContent.match(/[^0-9.]$/)) {
@@ -65,17 +63,6 @@ if (operands.length>1) {
 }
 }
 
-//not sure i need this anymore actually
-if (isNaN(numb2)) {
-    if (numb2!=='test') {
-        testString= numb2.toString();
-        numb2Array= testString.split('/') 
-        numb2=numb2Array[0];
-    }   
-}
-
-
-
 if (button.classList=='operator-btn') {
 
     if (operator=='+') {
@@ -87,7 +74,7 @@ if (button.classList=='operator-btn') {
     else if (operator=='x') {
         result= multiply(+numb1, +numb2);
     }
-  
+    
 
     if (button.id=='+') {
         operator= '+';
@@ -101,7 +88,6 @@ if (button.classList=='operator-btn') {
     else if (button.id=='equal') {
         operator='=';
     }
-    
 }
 
 if (button.id=='/100') {
@@ -120,6 +106,23 @@ if (button.id=='/100') {
 
 equalDisplay.textContent=result;
 
+
+if (button.id=='Ans') {
+    display.textContent = result;
+    numb1=result;
+    numb2='';
+    equalDisplay.textContent='';
+}
+
+if (button.id=='clear') {
+    display.textContent = '';
+    result=NaN;
+    equalDisplay.textContent='';
+}
+
+if (button.id=='equal') {
+    equalDisplay.textContent= "=" + "  " + result;
+}
 return result;
     })  
     })
