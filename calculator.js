@@ -27,24 +27,18 @@ const equalDisplay= document.querySelector('#equal-display');
 let result=NaN;
 let numb1=NaN;
 let numb2='test';
-let answer=false;
 let operator='';
 
 function math() {
 
 buttons.forEach((button)=> {button.addEventListener ('click', () => {
 
-let numbDisplay= button.id.match(/[%0-9.*+-=]/g);
+let numbDisplay= button.id.match(/[%0-9.*+-=/]/g);
 if (numbDisplay) {
     display.textContent+=button.id;
 }
 
-if (button.id=='clear') {
-    display.textContent = '';
-    equalDisplay.textContent='';
-}
-
-const operands=display.textContent.split(/[-+*]/);
+const operands=display.textContent.split(/[-+*/]/);
 
 if (button.id=='backspace') {
     
@@ -80,6 +74,9 @@ if (button.classList=='operator-btn') {
     else if (operator=='x') {
         result= multiply(+numb1, +numb2);
     }
+    else if (operator=='/') {
+        result=divide(+numb1, +numb2)
+    }
     
 
     if (button.id=='+') {
@@ -90,6 +87,9 @@ if (button.classList=='operator-btn') {
     }
     else if (button.id=='*') {
         operator='x';
+    }
+    else if (button.id=='/') {
+        operator='/'
     }
     else if (button.id=='equal') {
         operator='=';
@@ -114,16 +114,21 @@ equalDisplay.textContent=result;
 
 if (button.id=='Ans') {
     display.textContent = result;
+    equalDisplay.textContent='';
     numb1=result;
     numb2='';
 }
 
+if (button.id=='clear') {
+    display.textContent = '';
+    equalDisplay.textContent='';
+}
 
 if (button.id=='equal') {
     equalDisplay.textContent= "=" + "  " + result;
 }
-console.log(answer)
-return result, answer;
+
+return result;
     })  
     })
 };
@@ -131,7 +136,7 @@ return result, answer;
 
 //Keyboard functionality 
 document.addEventListener('keydown', (keyValue) => {
-    let key= keyValue.key.match(/[0-9.*+-]/g);
+    let key= keyValue.key.match(/[/0-9.*+-]/g);
     let button = document.querySelector(`button[id="${key}"]`);
         if (keyValue.key=='Enter') {
             button= document.querySelector(`button[id="${'equal'}"]`);
