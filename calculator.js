@@ -33,12 +33,12 @@ function math() {
 
 buttons.forEach((button)=> {button.addEventListener ('click', () => {
 
-let numbDisplay= button.id.match(/[%0-9.*+-=/]/g);
+let numbDisplay= button.id.match(/[%0-9.*+-=÷]/g);
 if (numbDisplay) {
     display.textContent+=button.id;
 }
 
-const operands=display.textContent.split(/[-+*/]/);
+const operands=display.textContent.split(/[-+*÷]/);
 
 if (button.id=='backspace') {
     
@@ -87,7 +87,7 @@ if (button.classList=='operator-btn') {
     else if (button.id=='*') {
         operator='x';
     }
-    else if (button.id=='/') {
+    else if (button.id=='÷') {
         operator='/'
     }
     else if (button.id=='equal') {
@@ -110,6 +110,9 @@ if (button.id=='/100') {
 } 
 
 equalDisplay.textContent=result;
+if (isNaN(result)) {
+    equalDisplay.textContent='';
+}
 
 if (button.id=='Ans') {
     display.textContent = result;
@@ -149,8 +152,8 @@ document.addEventListener('keydown', (keyValue) => {
             button= document.querySelector(`button[id="${'/100'}"]`);
         }
 
-        if (keyValue.key=' ') {
-            
+        if (keyValue.key=='/') {
+            button= document.querySelector(`button[id="${'÷'}"]`);
         }
 
         if (button) {
@@ -159,8 +162,46 @@ document.addEventListener('keydown', (keyValue) => {
 })
 
 math ();
+//theres a problem with ur code organization bc when u press + + then it does plus twice but after 2 times the error dissipates 
 
 
 //Game
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 
+function getRandomOp () {
+    let opArray=['+', '-', '*', '÷']
+    return opArray[Math.floor(Math.random() * 4)];
+}
+
+let gameTotal='';
+
+function game() {
+    let x=getRandomInt(9)
+    let y= getRandomInt(9);
+    let randomOp= getRandomOp();
+
+    if (randomOp=='+') {
+        gameTotal=add(x,y);
+    }
+    if (randomOp=='-') {
+        gameTotal=subtract(x,y)
+    }
+    if (randomOp=='*') {
+        gameTotal=multiply(x,y)
+    }
+    if (randomOp=='÷') {
+        gameTotal==divide(x,y)
+    }
+
+    display.textContent= x + randomOp + y
+    equalDisplay.textContent= "=  " + gameTotal
+
+    console.log(x, y, randomOp, gameTotal)
+    return gameTotal;
+}
+
+const gameMode=document.querySelector('#game')
+gameMode.addEventListener('click', game);
