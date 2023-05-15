@@ -49,7 +49,6 @@ if (button.id=='backspace') {
     display.textContent = display.textContent.substring(0, display.textContent.length-1);
 }
 
-
 if (operands.length>1) {
     if (operands[operands.length-1]!=='') {
         if (isNaN(result)) {
@@ -122,6 +121,8 @@ if (button.id=='Ans') {
 if (button.id=='clear') {
     display.textContent = '';
     equalDisplay.textContent='';
+    numb2='';
+    result=NaN;
 }
 
 if (button.id=='equal') {
@@ -132,7 +133,6 @@ return result;
     })  
     })
 };
-
 
 //Keyboard functionality 
 document.addEventListener('keydown', (keyValue) => {
@@ -160,5 +160,7 @@ document.addEventListener('keydown', (keyValue) => {
 
 math ();
 
-//lots of errors in the code like when u click CE the keyboard dont work properly and the backspace dont work and the equals dont work and so much lol
-//not sure how to mimick the hover and click effect with keyboard 
+
+//Game
+
+
