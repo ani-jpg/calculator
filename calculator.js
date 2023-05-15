@@ -33,106 +33,109 @@ function math() {
 
 buttons.forEach((button)=> {button.addEventListener ('click', () => {
 
-let numbDisplay= button.id.match(/[%0-9.*+-=÷]/g);
-if (numbDisplay) {
-    display.textContent+=button.id;
-}
-
-const operands=display.textContent.split(/[-+*÷]/);
-
-if (button.id=='backspace') {
-    
-    if (display.textContent.match(/[^0-9.]$/)) {
-        operator= '';
+    let numbDisplay= button.id.match(/[%0-9.*+-=÷]/g);
+    if (gameOn==false) {
+        if (numbDisplay) {
+        display.textContent+=button.id;
     }
-
-    display.textContent = display.textContent.substring(0, display.textContent.length-1);
-}
-
-if (operands.length>1) {
-    if (operands[operands.length-1]!=='') {
-        if (isNaN(result)) {
-            numb1=+(operands[0]);
-        }
-        else {
-            numb1= result;
-            
-        }
-        numb2= operands[operands.length-1];
-}
-}
-
-if (button.classList=='operator-btn') {
-
-    if (operator=='+') {
-        result= add(+numb1, +numb2);
-    }
-    else if (operator=='-') {
-        result= subtract(+numb1, +numb2)
-    }
-    else if (operator=='x') {
-        result= multiply(+numb1, +numb2);
-    }
-    else if (operator=='/') {
-        result=divide(+numb1, +numb2)
     }
     
-
-    if (button.id=='+') {
-        operator= '+';
-    }
-    else if (button.id=='-') {
-        operator='-';
-    }
-    else if (button.id=='*') {
-        operator='x';
-    }
-    else if (button.id=='÷') {
-        operator='/'
-    }
-    else if (button.id=='equal') {
-        operator='=';
-    }
-}
-
-if (button.id=='/100') {
+    const operands=display.textContent.split(/[-+*÷]/);
+    
+    if (button.id=='backspace') {
         
-    if (operands.length<=1) {
-        const percent=display.textContent.split('/100');
-        result=percentage(+(percent[0]))
+        if (display.textContent.match(/[^0-9.]$/)) {
+            operator= '';
+        }
+    
+        display.textContent = display.textContent.substring(0, display.textContent.length-1);
     }
+    
     if (operands.length>1) {
-        result=percentage(+result)
+        if (operands[operands.length-1]!=='') {
+            if (isNaN(result)) {
+                numb1=+(operands[0]);
+            }
+            else {
+                numb1= result;
+                
+            }
+            numb2= operands[operands.length-1];
     }
-    display.textContent = result;
-    numb1=result;
-    numb2='';
-} 
+    }
+    
+    if (button.classList=='operator-btn') {
+    
+        if (operator=='+') {
+            result= add(+numb1, +numb2);
+        }
+        else if (operator=='-') {
+            result= subtract(+numb1, +numb2)
+        }
+        else if (operator=='x') {
+            result= multiply(+numb1, +numb2);
+        }
+        else if (operator=='/') {
+            result=divide(+numb1, +numb2)
+        }
+        
+    
+        if (button.id=='+') {
+            operator= '+';
+        }
+        else if (button.id=='-') {
+            operator='-';
+        }
+        else if (button.id=='*') {
+            operator='x';
+        }
+        else if (button.id=='÷') {
+            operator='/'
+        }
+        else if (button.id=='equal') {
+            operator='=';
+        }
+    }
+    
+    if (button.id=='/100') {
+            
+        if (operands.length<=1) {
+            const percent=display.textContent.split('/100');
+            result=percentage(+(percent[0]))
+        }
+        if (operands.length>1) {
+            result=percentage(+result)
+        }
+        display.textContent = result;
+        numb1=result;
+        numb2='';
+    } 
+    
+    equalDisplay.textContent=result;
+    if (isNaN(result)) {
+        equalDisplay.textContent='';
+    }
+    
+    if (button.id=='Ans') {
+        display.textContent = result;
+        equalDisplay.textContent='';
+        numb1=result;
+        numb2='';
+    }
+    
+    if (button.id=='clear') {
+        display.textContent = '';
+        equalDisplay.textContent='';
+        numb2='';
+        result=NaN;
+    }
+    
+    if (button.id=='equal') {
+        equalDisplay.textContent= "=" + "  " + result;
+    }
+    
+    return result;
 
-equalDisplay.textContent=result;
-if (isNaN(result)) {
-    equalDisplay.textContent='';
-}
-
-if (button.id=='Ans') {
-    display.textContent = result;
-    equalDisplay.textContent='';
-    numb1=result;
-    numb2='';
-}
-
-if (button.id=='clear') {
-    display.textContent = '';
-    equalDisplay.textContent='';
-    numb2='';
-    result=NaN;
-}
-
-if (button.id=='equal') {
-    equalDisplay.textContent= "=" + "  " + result;
-}
-
-return result;
     })  
     })
 };
@@ -177,11 +180,15 @@ function getRandomOp () {
 }
 
 let gameTotal='';
-
+let gameOn=false;
+const displayBox=document.querySelector('.display-box')
 function game() {
     let x=getRandomInt(9)
     let y= getRandomInt(9);
     let randomOp= getRandomOp();
+
+    
+    gameOn=true;
 
     if (randomOp=='+') {
         gameTotal=add(x,y);
@@ -195,13 +202,18 @@ function game() {
     if (randomOp=='÷') {
         gameTotal==divide(x,y)
     }
-
     display.textContent= x + randomOp + y
-    equalDisplay.textContent= "=  " + gameTotal
 
-    console.log(x, y, randomOp, gameTotal)
     return gameTotal;
 }
 
+let input=document.createElement("input")
+    input.type="text";
+    input.maxLength=2;
+
 const gameMode=document.querySelector('#game')
-gameMode.addEventListener('click', game);
+gameMode.addEventListener('click', () => {
+    
+    displayBox.appendChild(input);
+    game();
+});
