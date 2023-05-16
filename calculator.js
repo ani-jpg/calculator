@@ -143,13 +143,9 @@ if (gameOn==false) {
         console.log('woohoo');
         if (userValue) {
             equalDisplay.textContent+=button.id;
-        }
-        
-        
-
-        
+        } 
     }
-    
+
 
     })  
     })
@@ -222,13 +218,20 @@ function game() {
 const gameMode=document.querySelector('#game')
 let enterButton = document.createElement("button");
 enterButton.id = "gameEnterBtn";
+let enterButton2=document.createElement("button");
+enterButton2.id="gameEnterBtn2"
+enterButton.classList.add("bigEnterKey");
+enterButton2.classList.add("bigEnterKey");
+
 const calcBox = document.querySelector(".calculator-box");
 const opBtns= document.querySelectorAll('.operator-btn');
+
 
 gameMode.addEventListener('click', () => {
     gameOn=true;
     equalDisplay.textContent='';
     calcBox.appendChild(enterButton);
+    calcBox.appendChild(enterButton2);
     opBtns.forEach(btn => {
         btn.remove();
     });
