@@ -33,13 +33,14 @@ function math() {
 
 buttons.forEach((button)=> {button.addEventListener ('click', () => {
 
+if (gameOn==false) {
     let numbDisplay= button.id.match(/[%0-9.*+-=÷]/g);
-    if (gameOn==false) {
+
         if (numbDisplay) {
         display.textContent+=button.id;
     }
-    }
-    
+
+
     const operands=display.textContent.split(/[-+*÷]/);
     
     if (button.id=='backspace') {
@@ -135,6 +136,20 @@ buttons.forEach((button)=> {button.addEventListener ('click', () => {
     }
     
     return result;
+    }
+    
+    else if (gameOn==true) {
+        let userValue=button.id.match(/[0-9.]/g)
+        console.log('woohoo');
+        if (userValue) {
+            equalDisplay.textContent+=button.id;
+        }
+        
+        
+
+        
+    }
+    
 
     })  
     })
@@ -187,9 +202,6 @@ function game() {
     let y= getRandomInt(9);
     let randomOp= getRandomOp();
 
-    
-    gameOn=true;
-
     if (randomOp=='+') {
         gameTotal=add(x,y);
     }
@@ -207,13 +219,20 @@ function game() {
     return gameTotal;
 }
 
-let input=document.createElement("input")
-    input.type="text";
-    input.maxLength=2;
-
 const gameMode=document.querySelector('#game')
+let enterButton = document.createElement("button");
+enterButton.id = "gameEnterBtn";
+const calcBox = document.querySelector(".calculator-box");
+const opBtns= document.querySelectorAll('.operator-btn');
+
 gameMode.addEventListener('click', () => {
+    gameOn=true;
+    equalDisplay.textContent='';
+    calcBox.appendChild(enterButton);
+    opBtns.forEach(btn => {
+        btn.remove();
+    });
     
-    displayBox.appendChild(input);
     game();
+    
 });
