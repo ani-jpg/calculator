@@ -193,6 +193,7 @@ function getRandomOp () {
 let gameTotal='';
 let gameOn=false;
 const displayBox=document.querySelector('.display-box')
+
 function game() {
     let x=getRandomInt(9)
     let y= getRandomInt(9);
@@ -218,6 +219,7 @@ function game() {
 const gameMode=document.querySelector('#game')
 let enterButton = document.createElement("button");
 enterButton.id = "gameEnterBtn";
+enterButton.textContent= "↵"
 let enterButton2=document.createElement("button");
 enterButton2.id="gameEnterBtn2"
 enterButton.classList.add("bigEnterKey");
@@ -225,17 +227,22 @@ enterButton2.classList.add("bigEnterKey");
 
 const calcBox = document.querySelector(".calculator-box");
 const opBtns= document.querySelectorAll('.operator-btn');
+const topRowBtns=document.querySelectorAll('.top-row-btns')
+const backspaceBtn=document.querySelector('#backspace');
 
 
 gameMode.addEventListener('click', () => {
     gameOn=true;
     equalDisplay.textContent='';
+    backspaceBtn.classList.add("backspaceBtn");
     calcBox.appendChild(enterButton);
     calcBox.appendChild(enterButton2);
     opBtns.forEach(btn => {
         btn.remove();
     });
-    
+    topRowBtns.forEach(btn => {
+        btn.remove();
+    });
     game();
     
 });
