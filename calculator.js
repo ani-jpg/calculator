@@ -146,7 +146,6 @@ if (gameOn==false) {
         } 
     }
 
-
     })  
     })
 };
@@ -175,7 +174,7 @@ document.addEventListener('keydown', (keyValue) => {
         }  
 })
 
-math ();
+
 //theres a problem with ur code organization bc when u press + + then it does plus twice but after 2 times the error dissipates 
 
 
@@ -216,7 +215,6 @@ function game() {
     return gameTotal;
 }
 
-const gameMode=document.querySelector('#game')
 let enterButton = document.createElement("button");
 enterButton.id = "gameEnterBtn";
 enterButton.textContent= "↵"
@@ -225,18 +223,24 @@ enterButton2.id="gameEnterBtn2"
 enterButton.classList.add("bigEnterKey");
 enterButton2.classList.add("bigEnterKey");
 
+let topRow= document.createElement("div");
+topRow.id='topRow';
+topRow.textContent='Timer here!!!';
+
+const gameMode=document.querySelector('#game')
 const calcBox = document.querySelector(".calculator-box");
 const opBtns= document.querySelectorAll('.operator-btn');
 const topRowBtns=document.querySelectorAll('.top-row-btns')
 const backspaceBtn=document.querySelector('#backspace');
 
-
 gameMode.addEventListener('click', () => {
     gameOn=true;
     equalDisplay.textContent='';
+    regCalc=false;
     backspaceBtn.classList.add("backspaceBtn");
     calcBox.appendChild(enterButton);
     calcBox.appendChild(enterButton2);
+    calcBox.appendChild(topRow);
     opBtns.forEach(btn => {
         btn.remove();
     });
@@ -244,5 +248,17 @@ gameMode.addEventListener('click', () => {
         btn.remove();
     });
     game();
-    
 });
+
+
+let regMode=document.querySelector('#regMode');
+let regCalc=true;
+
+regMode.addEventListener('click', () => {
+    gameOn=false;
+    regCalc=true;
+})
+
+if (regCalc==true) {
+    math();
+}
