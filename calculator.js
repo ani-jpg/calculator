@@ -169,9 +169,14 @@ document.addEventListener('keydown', (keyValue) => {
             button= document.querySelector(`button[id="${'÷'}"]`);
         }
 
+        if (keyValue.key='Enter') {
+            button= document.querySelector(`button[id="${'equal'}"]`);
+        }
+
         if (button) {
             button.click();
         }  
+        
 })
 
 
@@ -208,7 +213,7 @@ function game() {
         gameTotal=multiply(x,y)
     }
     if (randomOp=='÷') {
-        gameTotal==divide(x,y)
+        gameTotal=divide(x,y)
     }
     display.textContent= x + randomOp + y
 
@@ -235,8 +240,8 @@ const backspaceBtn=document.querySelector('#backspace');
 
 gameMode.addEventListener('click', () => {
     gameOn=true;
-    equalDisplay.textContent='';
     regCalc=false;
+    equalDisplay.textContent='';
     backspaceBtn.classList.add("backspaceBtn");
     calcBox.appendChild(enterButton);
     calcBox.appendChild(enterButton2);
@@ -251,6 +256,7 @@ gameMode.addEventListener('click', () => {
 });
 
 
+
 let regMode=document.querySelector('#regMode');
 let regCalc=true;
 
@@ -259,6 +265,4 @@ regMode.addEventListener('click', () => {
     regCalc=true;
 })
 
-if (regCalc==true) {
-    math();
-}
+math ();
