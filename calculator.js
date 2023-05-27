@@ -28,10 +28,12 @@ let result=NaN;
 let numb1=NaN;
 let numb2='test';
 let operator='';
+let correctAns=false;
 
 function math() {
 
 buttons.forEach((button)=> {button.addEventListener ('click', () => {
+const operands=display.textContent.split(/[-+*÷]/);
 
 if (gameOn==false) {
     let numbDisplay= button.id.match(/[%0-9.*+-=÷]/g);
@@ -39,9 +41,6 @@ if (gameOn==false) {
         if (numbDisplay) {
         display.textContent+=button.id;
     }
-
-
-    const operands=display.textContent.split(/[-+*÷]/);
     
     if (button.id=='backspace') {
         
@@ -94,7 +93,6 @@ if (gameOn==false) {
         else if (button.id=='equal') {
             operator='=';
         }
-        
     }
     
     if (button.id=='/100') {
@@ -154,10 +152,18 @@ if (gameOn==false) {
     
     else if (gameOn==true) {
         let userValue=button.id.match(/[0-9.]/g)
-        console.log('woohoo');
+        correctAns=false;
         if (userValue) {
             equalDisplay.textContent+=button.id;
         } 
+
+        if (equalDisplay.textContent==gameTotal) {
+            console.log('w')
+            correctAns=true;
+        }
+        else if (equalDisplay.textContent!=gameTotal) {
+            console.log('l')
+        }
     }
 
     })  
@@ -168,9 +174,6 @@ if (gameOn==false) {
 document.addEventListener('keydown', (keyValue) => {
     let key= keyValue.key.match(/[/0-9.*+-]/g);
     let button = document.querySelector(`button[id="${key}"]`);
-        if (keyValue.key=='Enter') {
-            button= document.querySelector(`button[id="${'equal'}"]`);
-        }
         if (keyValue.key=='Backspace') {
             button= document.querySelector(`button[id="${'backspace'}"]`);
         }
@@ -184,13 +187,19 @@ document.addEventListener('keydown', (keyValue) => {
         }
 
         if (keyValue.key=='Enter') {
-            button= document.querySelector(`button[id="${'equal'}"]`);
+            if (gameOn==false) {
+                button= document.querySelector(`button[id="${'equal'}"]`);
+            }
+            
+            else if (gameOn==true) {
+                button= document.querySelector('#gameEnterBtn2');
+                console.log('hi')
+            }
         }
 
         if (button) {
             button.click();
-        }  
-        
+        }      
 })
 
 //Game
@@ -225,7 +234,6 @@ function game() {
         gameTotal=divide(x,y)
     }
     display.textContent= x + randomOp + y
-
     return gameTotal;
 }
 
@@ -236,16 +244,6 @@ let enterButton2=document.createElement("button");
 enterButton2.id="gameEnterBtn2"
 enterButton.classList.add("bigEnterKey");
 enterButton2.classList.add("bigEnterKey");
-
-enterButton.addEventListener('click', ()=> {
-    enterButton2.click();
-})
-
-enterButton2.addEventListener('click', () => {
-    game();
-})
-
-
 
 let topRow= document.createElement("div");
 topRow.id='topRow';
@@ -271,17 +269,22 @@ gameMode.addEventListener('click', (button) => {
     topRowBtns.forEach(btn => {
         btn.remove();
     });
-    
 });
 
+enterButton.addEventListener('click', ()=> {
+    enterButton2.click();
+})
 
-
-let regMode=document.querySelector('#regMode');
-let regCalc=true;
-
-regMode.addEventListener('click', () => {
-    gameOn=false;
-    regCalc=true;
+enterButton2.addEventListener('click', () => {
+    if (correctAns==true) {
+        console.log('dfs')
+    }
+    
+    game();
 })
 
 math ();
+
+//need to change to allow negative numbers input as answers 
+//issues with divide like it gives u 3/7
+//backspace dont work in the game 
