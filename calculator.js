@@ -193,12 +193,7 @@ document.addEventListener('keydown', (keyValue) => {
         
 })
 
-
-//theres a problem with ur code organization bc when u press + + then it does plus twice but after 2 times the error dissipates 
-
-
 //Game
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -242,6 +237,16 @@ enterButton2.id="gameEnterBtn2"
 enterButton.classList.add("bigEnterKey");
 enterButton2.classList.add("bigEnterKey");
 
+enterButton.addEventListener('click', ()=> {
+    enterButton2.click();
+})
+
+enterButton2.addEventListener('click', () => {
+    game();
+})
+
+
+
 let topRow= document.createElement("div");
 topRow.id='topRow';
 topRow.textContent='Timer here!!!';
@@ -252,7 +257,7 @@ const opBtns= document.querySelectorAll('.operator-btn');
 const topRowBtns=document.querySelectorAll('.top-row-btns')
 const backspaceBtn=document.querySelector('#backspace');
 
-gameMode.addEventListener('click', () => {
+gameMode.addEventListener('click', (button) => {
     gameOn=true;
     regCalc=false;
     equalDisplay.textContent='';
@@ -266,7 +271,7 @@ gameMode.addEventListener('click', () => {
     topRowBtns.forEach(btn => {
         btn.remove();
     });
-    game();
+    
 });
 
 
