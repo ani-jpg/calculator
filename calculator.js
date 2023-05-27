@@ -66,7 +66,6 @@ if (gameOn==false) {
     }
     
     if (button.classList=='operator-btn') {
-    
         if (operator=='+') {
             result= add(+numb1, +numb2);
         }
@@ -79,7 +78,6 @@ if (gameOn==false) {
         else if (operator=='/') {
             result=divide(+numb1, +numb2)
         }
-        
     
         if (button.id=='+') {
             operator= '+';
@@ -96,6 +94,7 @@ if (gameOn==false) {
         else if (button.id=='equal') {
             operator='=';
         }
+        
     }
     
     if (button.id=='/100') {
@@ -107,12 +106,22 @@ if (gameOn==false) {
         if (operands.length>1) {
             result=percentage(+result)
         }
-        display.textContent = result;
+        if (result % 1 !== 0) {
+            display.textContent = result.toFixed(5);
+        }
+        else {
+            display.textContent = result
+        }
         numb1=result;
         numb2='';
     } 
-    
-    equalDisplay.textContent=result;
+    if (result % 1 !== 0) {
+    equalDisplay.textContent=result.toFixed(5);
+    }
+    else {
+        equalDisplay.textContent=result
+    }
+
     if (isNaN(result)) {
         equalDisplay.textContent='';
     }
@@ -132,7 +141,12 @@ if (gameOn==false) {
     }
     
     if (button.id=='equal') {
+        if (result % 1 !== 0) {
+        equalDisplay.textContent= "=" + "  " + result.toFixed(5);
+        }
+        else {
         equalDisplay.textContent= "=" + "  " + result;
+        }
     }
     
     return result;
@@ -169,7 +183,7 @@ document.addEventListener('keydown', (keyValue) => {
             button= document.querySelector(`button[id="${'÷'}"]`);
         }
 
-        if (keyValue.key='Enter') {
+        if (keyValue.key=='Enter') {
             button= document.querySelector(`button[id="${'equal'}"]`);
         }
 
