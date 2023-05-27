@@ -151,18 +151,17 @@ if (gameOn==false) {
     }
     
     else if (gameOn==true) {
-        let userValue=button.id.match(/[0-9.]/g)
+        let userValue=button.id.match(/[-0-9.]/g)
         correctAns=false;
         if (userValue) {
             equalDisplay.textContent+=button.id;
         } 
 
         if (equalDisplay.textContent==gameTotal) {
-            console.log('w')
             correctAns=true;
         }
         else if (equalDisplay.textContent!=gameTotal) {
-            console.log('l')
+            console.log('')
         }
     }
 
@@ -192,8 +191,7 @@ document.addEventListener('keydown', (keyValue) => {
             }
             
             else if (gameOn==true) {
-                button= document.querySelector('#gameEnterBtn2');
-                console.log('hi')
+                button= document.querySelector('#gameEnterBtn');
             }
         }
 
@@ -240,10 +238,8 @@ function game() {
 let enterButton = document.createElement("button");
 enterButton.id = "gameEnterBtn";
 enterButton.textContent= "↵"
-let enterButton2=document.createElement("button");
-enterButton2.id="gameEnterBtn2"
 enterButton.classList.add("bigEnterKey");
-enterButton2.classList.add("bigEnterKey");
+
 
 let topRow= document.createElement("div");
 topRow.id='topRow';
@@ -251,17 +247,18 @@ topRow.textContent='Timer here!!!';
 
 const gameMode=document.querySelector('#game')
 const calcBox = document.querySelector(".calculator-box");
-const opBtns= document.querySelectorAll('.operator-btn');
+const opBtns= document.querySelectorAll('[id="*"], [id="÷"], [id="equal"], [id="+"]');
 const topRowBtns=document.querySelectorAll('.top-row-btns')
 const backspaceBtn=document.querySelector('#backspace');
+const gameMinus=document.querySelector('[id="-"]')
 
 gameMode.addEventListener('click', (button) => {
     gameOn=true;
     regCalc=false;
     equalDisplay.textContent='';
     backspaceBtn.classList.add("backspaceBtn");
+    gameMinus.classList.add("gameMinus");
     calcBox.appendChild(enterButton);
-    calcBox.appendChild(enterButton2);
     calcBox.appendChild(topRow);
     opBtns.forEach(btn => {
         btn.remove();
@@ -272,15 +269,10 @@ gameMode.addEventListener('click', (button) => {
 });
 
 enterButton.addEventListener('click', ()=> {
-    enterButton2.click();
-})
-
-enterButton2.addEventListener('click', () => {
     if (correctAns==true) {
-        console.log('dfs')
+        game();
+        console.log('dfs');
     }
-    
-    game();
 })
 
 math ();
@@ -288,3 +280,4 @@ math ();
 //need to change to allow negative numbers input as answers 
 //issues with divide like it gives u 3/7
 //backspace dont work in the game 
+//dont forget the decimals and rounding in the game 

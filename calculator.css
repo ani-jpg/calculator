@@ -122,11 +122,6 @@ button:active {
     font-size: 50px;
 }
 
-#gameEnterBtn2 {
-    grid-column: 3/5;
-    grid-row-start: 5;
-}
-
 .bigEnterKey {
     display: flex;
     justify-content: space-between;
@@ -136,8 +131,8 @@ button:active {
 
 .backspaceBtn {
     background-color: yellow;
-    grid-column: 4;
-    grid-row: 2;
+    grid-column: 3;
+    grid-row: 5;
     text-align: center;
 ;}
 
@@ -151,4 +146,10 @@ button:active {
     font-size: 40px;
     padding: 10px 5px;
     padding-bottom: 0px;
+}
+
+.gameMinus {
+    grid-column: 4;
+    grid-row: 2;
+    background-color: brown;
 }
