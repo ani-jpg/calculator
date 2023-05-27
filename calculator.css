@@ -122,17 +122,10 @@ button:active {
     font-size: 50px;
 }
 
-.bigEnterKey {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: beige;
-}
-
 .backspaceBtn {
     background-color: yellow;
-    grid-column: 3;
-    grid-row: 5;
+    grid-column: 4;
+    grid-row: 2;
     text-align: center;
 ;}
 
@@ -149,7 +142,7 @@ button:active {
 }
 
 .gameMinus {
-    grid-column: 4;
-    grid-row: 2;
+    grid-column: 3;
+    grid-row: 5;
     background-color: brown;
 }

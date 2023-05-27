@@ -163,6 +163,10 @@ if (gameOn==false) {
         else if (equalDisplay.textContent!=gameTotal) {
             console.log('')
         }
+
+        if (button.id=='backspace') {
+            equalDisplay.textContent = equalDisplay.textContent.substring(0, equalDisplay.textContent.length-1);
+        }
     }
 
     })  
@@ -269,9 +273,10 @@ gameMode.addEventListener('click', (button) => {
 });
 
 enterButton.addEventListener('click', ()=> {
+    equalDisplay.textContent='';
     if (correctAns==true) {
         game();
-        console.log('dfs');
+        console.log(gameTotal);
     }
 })
 
