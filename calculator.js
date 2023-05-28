@@ -29,6 +29,7 @@ let numb1=NaN;
 let numb2='test';
 let operator='';
 let correctAns=false;
+let gameScore=-1;
 
 function math() {
 
@@ -160,8 +161,8 @@ if (gameOn==false) {
         if (equalDisplay.textContent==gameTotal) {
             correctAns=true;
         }
-        else if (equalDisplay.textContent!=gameTotal) {
-            console.log('')
+        else if (equalDisplay.textContent!=gameTotal) { 
+            console.log('wrong')
         }
 
         if (button.id=='backspace') {
@@ -244,10 +245,30 @@ enterButton.id = "gameEnterBtn";
 enterButton.textContent= "↵"
 enterButton.classList.add("bigEnterKey");
 
-
 let topRow= document.createElement("div");
 topRow.id='topRow';
-topRow.textContent='Timer here!!!';
+
+let mins= 2;
+let secs= 0;
+
+topRow.textContent=mins + ':' + ('0'+ secs).slice(-2);
+let timerInterval= setInterval(timer, 1000);
+
+function timer() {
+    if (secs==0) {
+        secs=59
+        mins=mins-1;
+    }
+    else {
+        secs=secs-1;
+    }
+    
+    if (secs==0 && mins==0) {
+        clearInterval(timerInterval);
+    }
+    topRow.textContent=mins + ':' + ('0'+ secs).slice(-2);
+}
+
 
 const gameMode=document.querySelector('#game')
 const calcBox = document.querySelector(".calculator-box");
@@ -274,10 +295,13 @@ gameMode.addEventListener('click', (button) => {
 
 enterButton.addEventListener('click', ()=> {
     equalDisplay.textContent='';
+    console.log(correctAns);
     if (correctAns==true) {
         game();
-        console.log(gameTotal);
+        gameScore+=1;
+        console.log(gameScore);
     }
+    return gameScore;
 })
 
 math ();
