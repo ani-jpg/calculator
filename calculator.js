@@ -205,7 +205,7 @@ document.addEventListener('keydown', (keyValue) => {
         }      
 })
 
-//Game
+//Game function
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -220,31 +220,33 @@ let gameOn=false;
 const displayBox=document.querySelector('.display-box')
 
 function game() {
-    let x=getRandomInt(9)
-    let y= getRandomInt(9);
+    let value1=getRandomInt(9)
+    let value2= getRandomInt(9);
     let randomOp= getRandomOp();
 
     if (randomOp=='+') {
-        gameTotal=add(x,y);
+        gameTotal=add(value1,value2);
     }
     if (randomOp=='-') {
-        gameTotal=subtract(x,y)
+        gameTotal=subtract(value1,value2);
     }
     if (randomOp=='*') {
-        gameTotal=multiply(x,y)
+        gameTotal=multiply(value1,value2);
     }
     if (randomOp=='÷') {
-        gameTotal=divide(x,y)
+        if (value2!=0 && value1%value2==0) {
+            gameTotal=divide(value1,value2);
+        }
+        else {
+            return;
+            
+        }
     }
-    display.textContent= x + randomOp + y
+    display.textContent= value1 + randomOp + value2;
     return gameTotal;
 }
 
-let enterButton = document.createElement("button");
-enterButton.id = "gameEnterBtn";
-enterButton.textContent= "↵"
-enterButton.classList.add("bigEnterKey");
-
+//Timer 
 let topRow= document.createElement("div");
 topRow.id='topRow';
 
@@ -269,7 +271,11 @@ function timer() {
     topRow.textContent=mins + ':' + ('0'+ secs).slice(-2);
 }
 
-
+//Game formatting
+let enterButton = document.createElement("button");
+enterButton.id = "gameEnterBtn";
+enterButton.textContent= "↵"
+enterButton.classList.add("bigEnterKey");
 const gameMode=document.querySelector('#game')
 const calcBox = document.querySelector(".calculator-box");
 const opBtns= document.querySelectorAll('[id="*"], [id="÷"], [id="equal"], [id="+"]');
