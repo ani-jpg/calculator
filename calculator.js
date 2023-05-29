@@ -219,6 +219,80 @@ let gameTotal='';
 let gameOn=false;
 const displayBox=document.querySelector('.display-box')
 
+//Timer 
+let topRow= document.createElement("div");
+topRow.id='topRow';
+
+let mins= 2;
+let secs= 0;
+
+topRow.textContent=mins + ':' + ('0'+ secs).slice(-2);
+
+function timer() {
+    if (secs==0) {
+        secs=59
+        mins=mins-1;
+    }
+    else {
+        secs=secs-1;
+    }
+    
+    if (secs==0 && mins==0) {
+        clearInterval(timerInterval);
+    }
+    topRow.textContent=mins + ':' + ('0'+ secs).slice(-2);
+}
+
+let start=document.createElement("button");
+start.id="startBtn";
+start.textContent="Start"
+
+let timerInterval;
+start.addEventListener('click', ()=> {
+    timerInterval=setInterval(timer, 1000);
+})
+
+//Game formatting
+let enterButton = document.createElement("button");
+enterButton.id = "gameEnterBtn";
+enterButton.textContent= "↵"
+enterButton.classList.add("bigEnterKey");
+const gameMode=document.querySelector('#game')
+const calcBox = document.querySelector(".calculator-box");
+const opBtns= document.querySelectorAll('[id="*"], [id="÷"], [id="equal"], [id="+"]');
+const topRowBtns=document.querySelectorAll('.top-row-btns')
+const backspaceBtn=document.querySelector('#backspace');
+const gameMinus=document.querySelector('[id="-"]')
+
+//choices
+let gameDigit=document.querySelector(".digits")
+let gameTime=document.querySelector(".time")
+
+let digitChoice=document.createElement("input");
+digitChoice.id="digitChoice"
+digitChoice.type="number"
+digitChoice.value = "1";
+digitChoice.min="1"
+digitChoice.max="4"
+
+let digitLabel=document.createElement("label");
+digitLabel.id='digitLabel'
+digitLabel.setAttribute("for", "digitChoice")
+digitLabel.textContent='Digit choice:'
+
+let timerChoice=document.createElement("input");
+timerChoice.id="timerChoice";
+timerChoice.type="number";
+timerChoice.value = "0.5";
+timerChoice.min="0.5"
+timerChoice.max="5"
+timerChoice.step='0.5'
+
+let timerLabel=document.createElement("label");
+timerLabel.id='timerLabel';
+timerLabel.setAttribute("for", "timerChoice")
+timerLabel.textContent='Time:'
+
 function game() {
     let value1=getRandomInt(9)
     let value2= getRandomInt(9);
@@ -246,43 +320,6 @@ function game() {
     return gameTotal;
 }
 
-//Timer 
-let topRow= document.createElement("div");
-topRow.id='topRow';
-
-let mins= 2;
-let secs= 0;
-
-topRow.textContent=mins + ':' + ('0'+ secs).slice(-2);
-let timerInterval= setInterval(timer, 1000);
-
-function timer() {
-    if (secs==0) {
-        secs=59
-        mins=mins-1;
-    }
-    else {
-        secs=secs-1;
-    }
-    
-    if (secs==0 && mins==0) {
-        clearInterval(timerInterval);
-    }
-    topRow.textContent=mins + ':' + ('0'+ secs).slice(-2);
-}
-
-//Game formatting
-let enterButton = document.createElement("button");
-enterButton.id = "gameEnterBtn";
-enterButton.textContent= "↵"
-enterButton.classList.add("bigEnterKey");
-const gameMode=document.querySelector('#game')
-const calcBox = document.querySelector(".calculator-box");
-const opBtns= document.querySelectorAll('[id="*"], [id="÷"], [id="equal"], [id="+"]');
-const topRowBtns=document.querySelectorAll('.top-row-btns')
-const backspaceBtn=document.querySelector('#backspace');
-const gameMinus=document.querySelector('[id="-"]')
-
 gameMode.addEventListener('click', (button) => {
     gameOn=true;
     regCalc=false;
@@ -291,6 +328,11 @@ gameMode.addEventListener('click', (button) => {
     gameMinus.classList.add("gameMinus");
     calcBox.appendChild(enterButton);
     calcBox.appendChild(topRow);
+    topRow.appendChild(start);
+    gameDigit.appendChild(digitLabel);
+    gameDigit.appendChild(digitChoice);
+    gameTime.appendChild(timerLabel);
+    gameTime.appendChild(timerChoice);
     opBtns.forEach(btn => {
         btn.remove();
     });

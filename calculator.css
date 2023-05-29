@@ -32,7 +32,7 @@ h1 {
 
 #display {
     min-height: 50px;
-    
+    font-size: 34px;
 }
 
 #equal-display {
@@ -112,6 +112,7 @@ button:active {
     padding: 15px 20px;
     margin: 25px;
     height: auto;
+    width: 240px;
 }
 
 #gameEnterBtn {
@@ -129,6 +130,12 @@ button:active {
     text-align: center;
 ;}
 
+.gameMinus {
+    grid-column: 3;
+    grid-row: 5;
+    background-color: brown;
+}
+
 #topRow {
     background-color: aquamarine;
     grid-row: 1;
@@ -141,8 +148,12 @@ button:active {
     padding-bottom: 0px;
 }
 
-.gameMinus {
-    grid-column: 3;
-    grid-row: 5;
-    background-color: brown;
+.modes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+#start {
+    
 }
