@@ -249,8 +249,21 @@ let gameOn=false;
 const displayBox=document.querySelector('.display-box')
 
 function game() {
-    let value1=getRandomInt(9)
-    let value2= getRandomInt(9);
+    let value1;
+    if (digitChoice.value==2) {
+        value1=getRandomInt(99)
+    }
+    else if (digitChoice.value==3) {
+        value1=getRandomInt(999)
+    }
+    else if(digitChoice.value==4) {
+        value1=getRandomInt(9999)
+    }
+    else {
+        value1=getRandomInt(9)
+    }
+
+    let value2= getRandomInt(9999);
     let randomOp= getRandomOp();
 
     if (randomOp=='+') {
@@ -282,9 +295,6 @@ let mins=0;
 let secs=0;
 
 function timer() {
-    
-
-    console.log(mins)
     if (secs==0) {
         secs=59
         mins=mins-1;
