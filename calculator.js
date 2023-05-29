@@ -205,66 +205,7 @@ document.addEventListener('keydown', (keyValue) => {
         }      
 })
 
-//Game function
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
-
-function getRandomOp () {
-    let opArray=['+', '-', '*', '÷']
-    return opArray[Math.floor(Math.random() * 4)];
-}
-
-let gameTotal='';
-let gameOn=false;
-const displayBox=document.querySelector('.display-box')
-
-//Timer 
-let topRow= document.createElement("div");
-topRow.id='topRow';
-
-let mins= 2;
-let secs= 0;
-
-topRow.textContent=mins + ':' + ('0'+ secs).slice(-2);
-
-function timer() {
-    if (secs==0) {
-        secs=59
-        mins=mins-1;
-    }
-    else {
-        secs=secs-1;
-    }
-    
-    if (secs==0 && mins==0) {
-        clearInterval(timerInterval);
-    }
-    topRow.textContent=mins + ':' + ('0'+ secs).slice(-2);
-}
-
-let start=document.createElement("button");
-start.id="startBtn";
-start.textContent="Start"
-
-let timerInterval;
-start.addEventListener('click', ()=> {
-    timerInterval=setInterval(timer, 1000);
-})
-
-//Game formatting
-let enterButton = document.createElement("button");
-enterButton.id = "gameEnterBtn";
-enterButton.textContent= "↵"
-enterButton.classList.add("bigEnterKey");
-const gameMode=document.querySelector('#game')
-const calcBox = document.querySelector(".calculator-box");
-const opBtns= document.querySelectorAll('[id="*"], [id="÷"], [id="equal"], [id="+"]');
-const topRowBtns=document.querySelectorAll('.top-row-btns')
-const backspaceBtn=document.querySelector('#backspace');
-const gameMinus=document.querySelector('[id="-"]')
-
-//choices
+//Choices
 let gameDigit=document.querySelector(".digits")
 let gameTime=document.querySelector(".time")
 
@@ -293,6 +234,20 @@ timerLabel.id='timerLabel';
 timerLabel.setAttribute("for", "timerChoice")
 timerLabel.textContent='Time:'
 
+//Game function
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function getRandomOp () {
+    let opArray=['+', '-', '*', '÷']
+    return opArray[Math.floor(Math.random() * 4)];
+}
+
+let gameTotal='';
+let gameOn=false;
+const displayBox=document.querySelector('.display-box')
+
 function game() {
     let value1=getRandomInt(9)
     let value2= getRandomInt(9);
@@ -320,6 +275,60 @@ function game() {
     return gameTotal;
 }
 
+//Timer 
+let topRow= document.createElement("div");
+topRow.id='topRow';
+let mins=0;
+let secs=0;
+
+function timer() {
+    
+
+    console.log(mins)
+    if (secs==0) {
+        secs=59
+        mins=mins-1;
+    }
+    else {
+        secs=secs-1;
+    }
+    
+    if (secs==0 && mins==0) {
+        clearInterval(timerInterval);
+    }
+    topRow.textContent= mins + ':' + ('0'+ secs).slice(-2);
+}
+
+let start=document.createElement("button");
+start.id="startBtn";
+start.textContent="Start"
+
+let timerInterval;
+
+start.addEventListener('click', ()=> {
+    mins= parseInt(timerChoice.value);
+    if (timerChoice.value.endsWith(.5)) {
+        secs=30;
+    }
+    else {
+        secs=0;
+    }
+    timerInterval=setInterval(timer, 1000);
+})
+
+//Game formatting variables
+let enterButton = document.createElement("button");
+enterButton.id = "gameEnterBtn";
+enterButton.textContent= "↵"
+enterButton.classList.add("bigEnterKey");
+const gameMode=document.querySelector('#game')
+const calcBox = document.querySelector(".calculator-box");
+const opBtns= document.querySelectorAll('[id="*"], [id="÷"], [id="equal"], [id="+"]');
+const topRowBtns=document.querySelectorAll('.top-row-btns')
+const backspaceBtn=document.querySelector('#backspace');
+const gameMinus=document.querySelector('[id="-"]')
+
+//Game events
 gameMode.addEventListener('click', (button) => {
     gameOn=true;
     regCalc=false;
