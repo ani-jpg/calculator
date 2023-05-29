@@ -161,10 +161,10 @@ if (gameOn==false) {
         if (equalDisplay.textContent==gameTotal) {
             correctAns=true;
         }
-        else if (equalDisplay.textContent!=gameTotal) { 
+        else if (equalDisplay.textContent!==gameTotal || equalDisplay.textContent.length==0) { 
             console.log('wrong')
         }
-
+        
         if (button.id=='backspace') {
             equalDisplay.textContent = equalDisplay.textContent.substring(0, equalDisplay.textContent.length-1);
         }
@@ -250,20 +250,24 @@ const displayBox=document.querySelector('.display-box')
 
 function game() {
     let value1;
+    let value2;
     if (digitChoice.value==2) {
         value1=getRandomInt(99)
+        value2=getRandomInt(99)
     }
     else if (digitChoice.value==3) {
         value1=getRandomInt(999)
+        value2=getRandomInt(999)
     }
     else if(digitChoice.value==4) {
         value1=getRandomInt(9999)
+        value2=getRandomInt(9999)
     }
     else {
         value1=getRandomInt(9)
+        value2=getRandomInt(9)
     }
 
-    let value2= getRandomInt(9999);
     let randomOp= getRandomOp();
 
     if (randomOp=='+') {
@@ -362,12 +366,15 @@ gameMode.addEventListener('click', (button) => {
 
 enterButton.addEventListener('click', ()=> {
     equalDisplay.textContent='';
-    console.log(correctAns);
+    console.log(equalDisplay.textContent.length)
     if (correctAns==true) {
         game();
         gameScore+=1;
-        console.log(gameScore);
     }
+    else {
+        return;
+    }
+    
     return gameScore;
 })
 
